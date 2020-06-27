@@ -9,6 +9,8 @@ export (float, 0, 1.0) var acceleration = 0.25
 
 var velocity := Vector2.ZERO
 
+onready var screen_size := get_viewport_rect().size
+
 func get_input():
 	var dir := 0
 	if Input.is_action_pressed("right"):
@@ -21,7 +23,18 @@ func get_input():
 	else:
 		velocity.x = lerp(velocity.x, 0, friction)
 
-
+func wrap_in_screen():
+	# horizontal
+	if position.x > screen_size.x:
+		position.x = 0
+	elif position.x < 0:
+		position.x = screen_size.x
+	# vertical
+	if position.y > screen_size.y:
+		position.y = 0
+	if position.y < 0:
+		position.y = screen_size.y
+	
 
 func _physics_process(delta: float):
 	get_input()
@@ -30,3 +43,6 @@ func _physics_process(delta: float):
 	if Input.is_action_just_pressed("jump"):
 		if self.is_on_floor():
 			velocity.y = jump_speed
+	wrap_in_screen()
+
+	
