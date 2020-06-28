@@ -30,4 +30,4 @@ func _ready():
 	camera2.current = true
 	minimapcamera.position = Vector2(512, 300)
 	
-	
+
