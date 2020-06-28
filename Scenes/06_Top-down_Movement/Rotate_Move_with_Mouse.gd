@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+class_name MouseMove
 
 var speed := 200
 const v_axis := JOY_AXIS_1
